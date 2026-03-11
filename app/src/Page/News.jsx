@@ -4,7 +4,7 @@ import Wrapper from '../components/Wrapper'
 const News = () => {
   return (
  <Wrapper>
-    
+    news
 
  </Wrapper>
   )
