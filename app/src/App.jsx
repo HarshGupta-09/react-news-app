@@ -11,9 +11,9 @@ function App() {
 
   return (
    <>
-  <Navbar/>
+  <Navbar className='sticky top-0 z-20'/>
   <Category className = "py-10"/>
-  <News/>
+  <News className= "pb-10"/>
   <Footer/>
    </>
   )

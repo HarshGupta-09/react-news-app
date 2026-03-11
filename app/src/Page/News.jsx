@@ -1,10 +1,10 @@
 import React from 'react'
 import Wrapper from '../components/Wrapper'
 
-const News = () => {
+const News = ({ className }) => {
   return (
  <Wrapper>
-    <div className='grid grid-cols-4 gap-6'>
+    <div className={`grid grid-cols-4 gap-6 ${className}`}>
       <NewsCard/>
       <NewsCard/>
       <NewsCard/>
