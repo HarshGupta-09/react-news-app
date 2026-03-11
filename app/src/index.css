@@ -1,2 +1,8 @@
-
+@plugin "daisyui";
 @import "tailwindcss";
+
+
+.scrollbar-none{
+    scrollbar-width: none;
+    
+}
