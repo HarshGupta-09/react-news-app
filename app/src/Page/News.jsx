@@ -1,27 +1,37 @@
 import React, { useEffect } from 'react'
 import Wrapper from '../components/Wrapper'
 
-import api from "../config/axios"
-const News = ({ className }) => {
 
-  const fetchNews = async () =>{
-      const response = await api.get(`/everything?q=bitcoin&apiKey=${import.meta.env.VITE_API_KEY}`)
-      console.log(response.data)
-    
-  }
+import { useNewsContext } from '../context/NewsContext';
+const News = ({ className }) => {
+  const {news , setNews,fetchNews} = useNewsContext();
+
+  
+
+
+
+
+
   useEffect(()=>{
-    fetchNews();
+    (async ()=>{
+      const data = await fetchNews();
+   setNews(data.articles)
+    })()
   },[])
 
   return (
  <Wrapper>
     <div className={`grid grid-cols-4 gap-6 ${className}`}>
-      <NewsCard/>
-      <NewsCard/>
-      <NewsCard/>
-      <NewsCard/>
-      <NewsCard/>
-      <NewsCard/>
+      {
+        news.map((newsDetails,id)=>{
+          if(!newsDetails.urlToImage)return null;
+        return   (
+          
+          <NewsCard key={id} detials = {newsDetails}/>
+        )
+        })
+      }
+     
      
     </div>
 
@@ -29,19 +39,23 @@ const News = ({ className }) => {
   )
 }
 
-const NewsCard = ()=>{
+const NewsCard = ({detials})=>{
   return <>
   <div className="card bg-base-200  shadow-sm">
-  <figure>
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+  <figure className='cursor-pointer' onClick={()=>{
+    window.open(detials.url)
+  }}>
+    <img className='w-full aspect-video object-contain'
+      src={detials?.urlToImage}
       alt="Shoes" />
   </figure>
   <div className="card-body">
-    <h2 className="card-title">Card Title</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
+    <h2 className="card-title line-clamp-2">{detials?.title}</h2>
+    <p className='line-clamp-3'>{detials.description} </p>
+    <div className="card-actions mt-4 justify-end">
+      <button onClick={()=>{
+        window.open(detials.url)
+      }} className="badge-outline btn">Read More</button>
     </div>
   </div>
 </div>
