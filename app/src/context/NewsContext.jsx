@@ -5,14 +5,21 @@ import api from '../config/axios'
 
   const NewsContextProvider = ({children}) =>{
   const [news, setNews] = useState([]);
+  const [loading , setLoading] = useState(false)
 
 
   const fetchNews = async (url="/everything?q=india") =>{
+     setLoading(true)
     try {
              const response = await api.get(`${url}&apiKey=${import.meta.env.VITE_API_KEY}`)
+              setLoading(false)
    return response.data;
     } catch (error) {
         console.log(error)
+              setLoading(false)
+
+           
+
     }
  
     
@@ -21,6 +28,7 @@ import api from '../config/axios'
     news,
     setNews,
     fetchNews,
+    loading
   }
     return (
         <NewsContext.Provider value={value}>

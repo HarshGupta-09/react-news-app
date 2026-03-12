@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import Wrapper from '../components/Wrapper'
-
+import Loader from '../components/Loader';
 
 import { useNewsContext } from '../context/NewsContext';
 const News = ({ className }) => {
-  const {news , setNews,fetchNews} = useNewsContext();
+  const {news , setNews,fetchNews,loading} = useNewsContext();
 
   
 
@@ -18,6 +18,10 @@ const News = ({ className }) => {
    setNews(data.articles)
     })()
   },[])
+  
+  if(loading){
+    return <Loader/>
+  }
 
   return (
  <Wrapper>

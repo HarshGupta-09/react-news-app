@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Wrapper from "./Wrapper"
 import { useNewsContext } from "../context/NewsContext";
-import loader from "./loader";
+import Loader from "./Loader";
 
 const Navbar = ( { className }) => {
 const { setNews,fetchNews} = useNewsContext();
