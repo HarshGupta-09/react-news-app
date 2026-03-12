@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import Wrapper from '../components/Wrapper'
-import axios from 'axios'
+
+import api from "../config/axios"
 const News = ({ className }) => {
 
   const fetchNews = async () =>{
-      const response = await axios(" https://newsapi.org/v2/everything?q=bitcoin&apiKey=4485a5e3f2234c2eac89fff9931d0102")
+      const response = await api.get(`/everything?q=bitcoin&apiKey=${import.meta.env.VITE_API_KEY}`)
       console.log(response.data)
     
   }
